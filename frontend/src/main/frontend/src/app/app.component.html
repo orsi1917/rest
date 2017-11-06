@@ -1,0 +1,63 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Assignment.</h1>
+  </div>
+</div>
+<div class="row" style="font-size: 14px;">
+  <div class="col-sm-12">
+    <h3>Functional requirements</h3>
+    <p>
+      Our client application requires data from different sources. A REST API service needs to be created to gather data from these sources. This will decrease the amount of calls on the client application.
+    </p>
+    <p>
+      Retrieving data from different sources can be time consuming. Implement a solution when retrieving data from different sources is done parallel.
+    </p>
+    <p>
+      By introducing this new REST API service we would also like to monitor this service.
+    </p>
+
+    <h3>Technical requirements</h3>
+    <ul>
+      <li>Introduce an endpoint to retrieve data which consist of data from different sources (you may define the url yourself)</li>
+      <li>Return a JSON response to clients visiting the endpoint, you may define a model for the result yourself.</li>
+      <li>The endpoints of the sources must be configured in a properties file</li>
+      <li>Introduce a new endpoint that exposes a JSON view of application version, number of consumer invocations and average request processing time.</li>
+      <li>Add documentation for the usage of the endpoints</li>
+    </ul>
+
+    <h3>Bonus assignment</h3>
+    <p>Front end code is not the main priority of this assignment, we will be focusing on your backend implementation.</p>
+    <ul>
+      <li><strong>Bonus assignment 01</strong>: Create a simple Single Page Application (SPA) which connects to your endpoints and outputs the data</li>
+      <li><strong>Bonus assignment 02</strong>: Add additional client side features</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p>
+      By no means is the goal to get a solution covering all special cases in a 100% robust way. Requiring this
+      would be naive. At least the functions described shall be error free when used correctly, how everything
+      else is handled is subject to creativity and ambition.
+    </p>
+    <p>
+      We will pay attention to code structure, threading and understanding of the problem, as well as the
+      discussion around design and choice of data structures.
+    </p>
+    <p>
+      <strong>Please note</strong>: This type of exhaustive specification is extremely rare at klm.com and does by no means
+      represent the way we do or want to work. In reality the “specification” is almost always verbal and implicit
+      and it is up to the individual developers or groups to formulate code that best represents the solution.
+    </p>
+
+    <h3>Here are some links to help you start: </h3>
+    <ul>
+      <li>
+        <a target="_blank" rel="noopener" href="https://spring.io/guides">Spring Tutorials</a>
+      </li>
+      <li>
+        <a target="_blank" rel="noopener" href="https://angular.io/tutorial">SPA tutorial with Angular 'Tour of Heroes'</a>
+      </li>
+    </ul>
+
+  </div>
+</div>
