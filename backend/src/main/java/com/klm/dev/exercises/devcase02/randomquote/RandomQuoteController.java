@@ -7,21 +7,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/quote")
+@RestController
 public class RandomQuoteController {
     @Autowired
     private RandomQuoteClient randomQuoteClient;
 
     @CrossOrigin
-    @GetMapping
+    @GetMapping("/quote")
     public Quote getQuote() {
         return randomQuoteClient.getQuote();
     }
 
     @CrossOrigin
     @GetMapping ("/many")
-    public Quote[] getQuotes() {
-        return randomQuoteClient.getQuotes();
-    }
+    public Quote[] getQuotes() {   return randomQuoteClient.getQuotes(); }
+//    {
+//        Quote[] quotes= new Quote[2];
+//        Quote q = new Quote();
+//        quotes[0]=q;
+//        quotes[1]=q;
+//        return quotes;
+//
+//    }
 
 }

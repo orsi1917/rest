@@ -50,12 +50,6 @@ public class RandomQuoteClient {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
-            } finally {
-                System.out.print(quotes.size());
-               Quote[] quoteArry = new Quote[quotes.size()];
-                quoteArry = quotes.toArray(quoteArry);
-                return quoteArry;
-
             }
         }
         Quote[] quoteArry = new Quote[quotes.size()];

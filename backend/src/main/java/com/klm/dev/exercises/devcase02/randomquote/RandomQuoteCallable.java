@@ -18,7 +18,7 @@ public class RandomQuoteCallable implements Callable<Quote> {
 
     @Override
     public Quote call() throws Exception {
-        return restTemplate.getForObject(url, Quote.class);
+        return restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
 
     }
 }
