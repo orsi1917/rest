@@ -19,15 +19,7 @@ public class RandomQuoteController {
     }
 
     @CrossOrigin
-    @GetMapping ("/many")
-    public Quote[] getQuotes() {   return randomQuoteClient.getQuotes(); }
-//    {
-//        Quote[] quotes= new Quote[2];
-//        Quote q = new Quote();
-//        quotes[0]=q;
-//        quotes[1]=q;
-//        return quotes;
-//
-//    }
+    @GetMapping ("/quotes")
+    public List<Quote> getQuotes() {   return randomQuoteClient.getQuotes(); }
 
 }

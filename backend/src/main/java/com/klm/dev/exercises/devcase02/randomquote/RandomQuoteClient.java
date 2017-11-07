@@ -18,6 +18,7 @@ import java.util.concurrent.*;
 @Service
 @Configuration
 @PropertySource("classpath:RandomQuote.properties")
+
 public class RandomQuoteClient {
 
     private RestTemplate restTemplate = new RestTemplate();
@@ -26,16 +27,19 @@ public class RandomQuoteClient {
     @Value("${url}")
     private String url;
 
+    @Value("${repeat}")
+    private int repeat;
+
     public Quote getQuote() {
         return restTemplate.getForObject(url, Quote.class);
     }
 
-    public Quote[] getQuotes() {
+    public List<Quote> getQuotes() {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         List<Future<Quote>> list = new ArrayList<Future<Quote>>();
         List<Quote> quotes = new ArrayList<Quote>();
-        for (int i = 0; i < 10; i++) {
-            Callable<Quote> worker = new RandomQuoteCallable();
+        for (int i = 0; i < repeat; i++) {
+            Callable<Quote> worker = new RandomQuoteCallable(restTemplate, url);
             Future<Quote> submit = executor.submit(worker);
             list.add(submit);
         }
@@ -52,10 +56,8 @@ public class RandomQuoteClient {
                 e.printStackTrace();
             }
         }
-        Quote[] quoteArry = new Quote[quotes.size()];
-        quoteArry = quotes.toArray(quoteArry);
-        executor.shutdown();
-        return quoteArry;
+
+        return quotes;
 
     }
 }
