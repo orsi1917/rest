@@ -14,7 +14,7 @@ public class FlightController {
     @CrossOrigin
     @GetMapping("/flights")
     public Flight[] getFlights() {
-        return flightClient.getFlights();
+        return flightClient.getFlights2();
     }
 
 }

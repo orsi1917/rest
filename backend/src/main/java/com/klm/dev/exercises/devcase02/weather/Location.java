@@ -9,6 +9,7 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Location {
     private String name;
+    private String locationCode;
     private String region;
     private String country;
     private String localtime;

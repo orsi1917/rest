@@ -22,7 +22,13 @@ public class WeatherClient {
     private String url;
 
     public Weather getWeather(String cityName) {
-        return restTemplate.getForObject(url+cityName, Weather.class);
+        Weather weather= new Weather();
+        weather= restTemplate.getForObject(url+cityName, Weather.class);
+        Location location = new Location();
+        location= weather.getLocation();
+        location.setLocationCode(cityName);
+        weather.setLocation(location);
+        return weather;
         }
     public List<Weather> getWeathers(String[] cityName) {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);

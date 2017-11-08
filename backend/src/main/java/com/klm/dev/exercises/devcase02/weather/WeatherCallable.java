@@ -14,7 +14,15 @@ public class WeatherCallable implements Callable<Weather> {
     }
     @Override
     public Weather call() throws Exception {
-        return restTemplate.getForObject(url, Weather.class);
+        Weather weather= new Weather();
+        weather=  restTemplate.getForObject(url, Weather.class);
+        Location location = new Location();
+        String cityName=new String();
+        cityName = url.substring(url.length()-3);
+        location= weather.getLocation();
+        location.setLocationCode(cityName);
+        weather.setLocation(location);
+        return weather;
 
     }
 }

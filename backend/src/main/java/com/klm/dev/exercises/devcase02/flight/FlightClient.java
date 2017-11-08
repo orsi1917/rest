@@ -37,5 +37,34 @@ public class FlightClient {
         }
         return flights;
     }
+    public Flight[] getFlights2() {
+        Flight[] flights = restTemplate.getForObject(url, Flight[].class);
+        ArrayList <String> locations = new ArrayList<String>();
+        for (Flight flight: flights){
+            String[] cityName = flight.getRoute();
+            for (int i=0; i<cityName.length;i++){
+                if(!locations.contains(cityName[i])){
+                    locations.add(cityName[i]);
+                }
+            }
+
+        }
+        String[] location = new String[locations.size()];
+        List<Weather> weathers = weatherClient.getWeathers(locations.toArray(location));
+        for (Flight flight: flights){
+            Weather[] flightWeather = flight.getWeather();
+            flightWeather = new Weather[flight.getRoute().length];
+            for (int i =0; i<flight.getRoute().length; i++ ) {
+                for (Weather weather : weathers){
+                    if (weather.getLocation().getLocationCode().equals(flight.getRoute()[i])){
+                        flightWeather[i]=weather;
+                        continue;
+                    }
+                }
+            }
+            flight.setWeather(flightWeather);
+        }
+        return flights;
+    }
 }
 
