@@ -10,13 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Configuration
 @PropertySource("classpath:Flight.properties")
 public class FlightClient {
-    private RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
+
     private static final int NTHREDS = 10;
 
     @Autowired
@@ -46,13 +50,11 @@ public class FlightClient {
         // with all locations at once.
 
         Flight[] flights = restTemplate.getForObject(url, Flight[].class);
-        ArrayList <String> locations = new ArrayList<String>();
+        Set<String> locations = new HashSet<>();
         for (Flight flight: flights){
             String[] cityName = flight.getRoute();
-            for (int i=0; i<cityName.length;i++){
-                if(!locations.contains(cityName[i])){
-                    locations.add(cityName[i]);
-                }
+            for (String city : flight.getRoute()){
+                    locations.add(city);
             }
 
         }
