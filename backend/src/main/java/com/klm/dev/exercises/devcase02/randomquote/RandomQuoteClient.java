@@ -24,7 +24,7 @@ public class RandomQuoteClient {
     private RestTemplate restTemplate = new RestTemplate();
     private static final int NTHREDS = 10;
 
-    @Value("${url}")
+    @Value("${quote.url}")
     private String url;
 
     @Value("${repeat}")

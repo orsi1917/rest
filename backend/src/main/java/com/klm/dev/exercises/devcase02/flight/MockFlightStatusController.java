@@ -1,4 +1,4 @@
-package com.klm.dev.exercises.devcase02.weather;
+package com.klm.dev.exercises.devcase02.flight;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
