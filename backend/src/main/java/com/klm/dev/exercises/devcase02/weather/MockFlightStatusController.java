@@ -1,18 +1,10 @@
-package com.klm.dev.exercises.devcase02.weatherandflight;
+package com.klm.dev.exercises.devcase02.weather;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
 
 @Configuration
 @RestController
@@ -25,7 +17,6 @@ public class MockFlightStatusController {
 
     @GetMapping("/flightstatus")
     public String getFlightStatus() {
-
         return  flightstatus;
     }
 }
