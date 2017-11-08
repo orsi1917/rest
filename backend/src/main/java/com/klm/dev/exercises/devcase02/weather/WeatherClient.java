@@ -26,6 +26,12 @@ public class WeatherClient {
         weather= restTemplate.getForObject(url+cityName, Weather.class);
         Location location = new Location();
         location= weather.getLocation();
+        // The JSON from the weather API does not contain a field locationCode (airport code).
+        // The weather API is called with the code-name of the airport.
+       //  The name for the airport in the flight status API and name for the airport in
+        // the weather API are different.
+        // here the code adds the airport code-name to the location object in weather to keep it
+        // comperable.
         location.setLocationCode(cityName);
         weather.setLocation(location);
         return weather;
@@ -40,8 +46,7 @@ public class WeatherClient {
             list.add(submit);
         }
         Weather weather = new Weather();
-        // now retrieve the result
-        for (Future<Weather> future : list) {
+           for (Future<Weather> future : list) {
             try {
                 weather = future.get();
                 weathers.add(weather);

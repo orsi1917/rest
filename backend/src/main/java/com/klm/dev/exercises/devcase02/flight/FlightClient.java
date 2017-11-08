@@ -24,7 +24,8 @@ public class FlightClient {
 
     @Value("${flights.url}")
     private String url;
-
+//Goes through all flights one by one, and calls the weather information on all locations
+// per flight
     public Flight[] getFlights() {
         Flight[] flights = restTemplate.getForObject(url, Flight[].class);
         for (Flight flight: flights){
@@ -38,6 +39,12 @@ public class FlightClient {
         return flights;
     }
     public Flight[] getFlights2() {
+        //First the method gets all flights. Than it iterates through the flights, and the
+        // routs of flights. It adds the airport code-name of the route to a String ArrayList
+        // if it is not yet in the list.
+        //It converts the ArrayList to an array, and makes a paralell call to the weather API
+        // with all locations at once.
+
         Flight[] flights = restTemplate.getForObject(url, Flight[].class);
         ArrayList <String> locations = new ArrayList<String>();
         for (Flight flight: flights){
@@ -51,6 +58,10 @@ public class FlightClient {
         }
         String[] location = new String[locations.size()];
         List<Weather> weathers = weatherClient.getWeathers(locations.toArray(location));
+        //It goes through all flights again, one by one, and checks each step of the route.
+        // Then it iterates through the ArrayList of the weathers. If the airport code-name of
+        // the flight route is the same as the airport code-name in the location of the weather in
+        // the arraylist, it adds the weather to the weather array of the flight.
         for (Flight flight: flights){
             Weather[] flightWeather = flight.getWeather();
             flightWeather = new Weather[flight.getRoute().length];
