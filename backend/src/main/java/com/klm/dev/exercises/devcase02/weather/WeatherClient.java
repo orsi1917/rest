@@ -1,6 +1,7 @@
 package com.klm.dev.exercises.devcase02.weather;
 
 import com.klm.dev.exercises.devcase02.randomquote.RandomQuoteCallable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -15,8 +16,9 @@ import java.util.concurrent.*;
 @Configuration
 @PropertySource("classpath:Weather.properties")
 public class WeatherClient {
-    private RestTemplate restTemplate = new RestTemplate();
-    private static final int NTHREDS = 10;
+    @Autowired
+    private RestTemplate restTemplate;
+    private static final int NTHREDS = 30;
 
     @Value("${url}")
     private String url;

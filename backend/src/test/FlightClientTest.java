@@ -1,10 +1,14 @@
 import com.klm.dev.exercises.devcase02.flight.Flight;
 import com.klm.dev.exercises.devcase02.flight.FlightClient;
+import com.klm.dev.exercises.devcase02.weather.Location;
+import com.klm.dev.exercises.devcase02.weather.Weather;
 import com.klm.dev.exercises.devcase02.weather.WeatherClient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -12,6 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
@@ -43,10 +51,26 @@ public class FlightClientTest {
         Flight flight = new Flight();
         String[] route = {"AMS", "JFK"};
         flight.setRoute(route);
-        Flight[] flights = {flight};
+        Flight[] flights = {flight, flight};
         when(restTemplate.getForObject(anyString(), eq(Flight[].class))).thenReturn(flights);
+
+        Weather weather1 = new Weather();
+        Location location1 = new Location();
+        location1.setLocationCode("AMS");
+        weather1.setLocation(location1);
+        Weather weather2 = new Weather();
+        Location location2 = new Location();
+        location2.setLocationCode("JFK");
+        weather2.setLocation(location2);
+        List<Weather> newweathers = new ArrayList<Weather>();
+        newweathers.add(weather1);
+        newweathers.add(weather2);
+        Weather[] weatherarray= new Weather[ newweathers.size()];
+        weatherarray= newweathers.toArray(weatherarray);
+        when(weatherClient.getWeathers(Mockito.any(String[].class))).thenReturn(newweathers);
         Flight[] response = flightClient.getFlights2();
         verify(weatherClient).getWeathers(route);
+        assertTrue(Arrays.deepEquals(flight.getWeather(), weatherarray));
     }
 
 }

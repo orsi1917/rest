@@ -13,4 +13,8 @@ public class Current {
     private  Double temp_f;
     private Boolean is_day;
     private Condition condition;
+    private Double wind_mph;
+    private Double wind_kph;
+    private Double feelslike_c;
+    private Double feelslike_f;
 }

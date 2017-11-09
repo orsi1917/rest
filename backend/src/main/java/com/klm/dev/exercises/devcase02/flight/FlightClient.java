@@ -21,7 +21,7 @@ public class FlightClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final int NTHREDS = 10;
+    private static final int NTHREDS = 20;
 
     @Autowired
     private WeatherClient weatherClient;
@@ -56,7 +56,6 @@ public class FlightClient {
             for (String city : flight.getRoute()){
                     locations.add(city);
             }
-
         }
         String[] location = new String[locations.size()];
         List<Weather> weathers = weatherClient.getWeathers(locations.toArray(location));
