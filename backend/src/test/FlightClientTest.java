@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -31,8 +32,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @Configuration
-@PropertySource("classpath:Flight.properties")
+@TestPropertySource(locations = {"classpath:Test.properties"})
 public class FlightClientTest {
 
     private FlightClient flightClient;
@@ -42,6 +44,8 @@ public class FlightClientTest {
 
     @Value("${test.airportCode1}")
     private String airportCode1;
+    @Value("${test.airportCode2}")
+    private String airportCode2;
 
     @Before
     public void setup(){
@@ -55,20 +59,19 @@ public class FlightClientTest {
 
     @Test
     public void testGetFlights(){
-        System.out.println(airportCode1);
         Flight flight = new Flight();
-        String[] route = {"AMS", "JFK"};
+        String[] route = {airportCode1, airportCode2};
         flight.setRoute(route);
         Flight[] flights = {flight, flight};
         when(restTemplate.getForObject(anyString(), eq(Flight[].class))).thenReturn(flights);
 
         Weather weather1 = new Weather();
         Location location1 = new Location();
-        location1.setLocationCode("AMS");
+        location1.setLocationCode(airportCode1);
         weather1.setLocation(location1);
         Weather weather2 = new Weather();
         Location location2 = new Location();
-        location2.setLocationCode("JFK");
+        location2.setLocationCode(airportCode2);
         weather2.setLocation(location2);
         List<Weather> newweathers = new ArrayList<Weather>();
         newweathers.add(weather1);
