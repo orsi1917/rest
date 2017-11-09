@@ -10,8 +10,11 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -28,13 +31,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@Configuration
+@PropertySource("classpath:Flight.properties")
 public class FlightClientTest {
 
     private FlightClient flightClient;
 
     private RestTemplate restTemplate;
-
     private WeatherClient weatherClient;
+
+    @Value("${test.airportCode1}")
+    private String airportCode1;
 
     @Before
     public void setup(){
@@ -48,6 +55,7 @@ public class FlightClientTest {
 
     @Test
     public void testGetFlights(){
+        System.out.println(airportCode1);
         Flight flight = new Flight();
         String[] route = {"AMS", "JFK"};
         flight.setRoute(route);
