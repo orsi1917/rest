@@ -14,6 +14,6 @@ public class Flight {
     private int flightNumber;
     private String flightScheduleDate;
     private String id;
-    List<String> route;
-    List<Weather> weather;
+    private List<String> route;
+    private List<Weather> weather;
 }
