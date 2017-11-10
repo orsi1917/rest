@@ -1,8 +1,11 @@
 package com.klm.dev.exercises.devcase02.randomquote;
 
+import com.klm.dev.exercises.devcase02.executorhandling.ExecutorHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +18,18 @@ import java.util.concurrent.*;
 @PropertySource("classpath:randomQuote.properties")
 
 public class RandomQuoteClient {
+    @Autowired
+    private RestTemplate restTemplate;
 
-    private RestTemplate restTemplate = new RestTemplate();
-    private static final int NUMBEROFTHREADS = 10;
+
+    @Value("${executor.CorePoolSize}")
+    private int corePoolSize;
+    @Value("${executor.MaxPoolSize}")
+    private int maxPoolSize;
+    @Value("${executor.QueueCapacity}")
+    private int queueCapacity;
+    @Value("${executor.KeepAliveSeconds}")
+    private int keepAliveSeconds;
 
     @Value("${quote.url}")
     private String url;
@@ -30,7 +42,7 @@ public class RandomQuoteClient {
     }
 
     public List<Quote> getQuotes() {
-        ExecutorService executor = Executors.newFixedThreadPool(NUMBEROFTHREADS);
+        ThreadPoolTaskExecutor executor = ExecutorHandler.getConfiguredThreadPoolTaskExecutor(corePoolSize, maxPoolSize, queueCapacity, keepAliveSeconds);
         List<Future<Quote>> list = new ArrayList<Future<Quote>>();
         List<Quote> quotes = new ArrayList<Quote>();
         for (int i = 0; i < repeat; i++) {
@@ -56,7 +68,3 @@ public class RandomQuoteClient {
 
     }
 }
-
-
-
-
