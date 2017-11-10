@@ -5,6 +5,8 @@ import com.klm.dev.exercises.devcase02.weather.Weather;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +14,6 @@ public class Flight {
     private int flightNumber;
     private String flightScheduleDate;
     private String id;
-    String[] route;
-   Weather[] weather;
+    List<String> route;
+    List<Weather> weather;
 }

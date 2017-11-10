@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/quotes")
+@RestController
+@RequestMapping("/quotes")
 @PropertySource("classpath:RandomQuote.properties")
 public class RandomQuoteController {
     @Autowired

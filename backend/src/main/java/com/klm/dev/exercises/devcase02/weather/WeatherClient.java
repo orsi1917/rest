@@ -38,12 +38,12 @@ public class WeatherClient {
         weather.setLocation(location);
         return weather;
         }
-    public List<Weather> getWeathers(String[] cityName) {
+    public List<Weather> getWeathers(List<String> cityName) {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
         List<Future<Weather>> list = new ArrayList<Future<Weather>>();
         List<Weather> weathers = new ArrayList<Weather>();
-        for (int i = 0; i < cityName.length; i++) {
-            Callable<Weather> worker = new WeatherCallable(restTemplate, url+cityName[i]);
+        for (int i = 0; i < cityName.size(); i++) {
+            Callable<Weather> worker = new WeatherCallable(restTemplate, url+cityName.get(i));
             Future<Weather> submit = executor.submit(worker);
             list.add(submit);
         }

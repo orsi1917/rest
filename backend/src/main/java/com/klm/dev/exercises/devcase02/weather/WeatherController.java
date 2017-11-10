@@ -22,7 +22,7 @@ public class WeatherController {
 
     @CrossOrigin
     @GetMapping("/weathers/" )
-    public List<Weather> getWeather (String[] cityName) {
+    public List<Weather> getWeather (List<String> cityName) {
        return weatherClient.getWeathers(cityName);
 
         }

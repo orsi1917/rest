@@ -59,7 +59,9 @@ public class FlightClientTest {
     @Test
     public void testGetFlights(){
         Flight flight = new Flight();
-        String[] route = {airportCode1, airportCode2};
+        List<String> route = new ArrayList<>();
+        route.add(airportCode1);
+        route.add(airportCode2);
         flight.setRoute(route);
         Flight[] flights = {flight, flight};
         when(restTemplate.getForObject(anyString(), eq(Flight[].class))).thenReturn(flights);
@@ -76,12 +78,13 @@ public class FlightClientTest {
         newweathers.add(weather2);
         Weather[] weatherarray= new Weather[ newweathers.size()];
         weatherarray= newweathers.toArray(weatherarray);
-        when(weatherClient.getWeathers(Mockito.any(String[].class))).thenReturn(newweathers);
 
-        Flight[] response = flightClient.getFlights2();
+        when(weatherClient.getWeathers(Mockito.any(List.class) )).thenReturn(newweathers);
+
+        List <Flight> response = flightClient.getFlights();
 
         verify(weatherClient).getWeathers(route);
-        assertTrue(Arrays.deepEquals(flight.getWeather(), weatherarray));
+        assertTrue(Arrays.deepEquals(flight.getWeather().toArray(), newweathers.toArray()));
     }
 
 }
