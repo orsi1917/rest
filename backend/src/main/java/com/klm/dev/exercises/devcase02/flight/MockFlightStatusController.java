@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Configuration
 @RestController
-@PropertySource("FlightStatusAPI_Response.txt")
+@PropertySource("flightStatusAPIResponse.properties")
 public class MockFlightStatusController {
 
     @Value("${value}")

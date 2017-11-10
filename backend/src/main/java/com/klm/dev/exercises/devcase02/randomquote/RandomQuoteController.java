@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quotes")
-@PropertySource("classpath:RandomQuote.properties")
+@PropertySource("classpath:randomQuote.properties")
 public class RandomQuoteController {
     @Autowired
     private RandomQuoteClient randomQuoteClient;

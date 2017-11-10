@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 
 @Service
 @Configuration
-@PropertySource("classpath:Weather.properties")
+@PropertySource("classpath:weather.properties")
 public class WeatherClient {
     @Autowired
     private RestTemplate restTemplate;

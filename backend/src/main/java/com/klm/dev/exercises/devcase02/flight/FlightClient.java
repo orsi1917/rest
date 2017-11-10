@@ -13,7 +13,7 @@ import java.util.*;
 
 @Service
 @Configuration
-@PropertySource("classpath:Flight.properties")
+@PropertySource("classpath:flight.properties")
 public class FlightClient {
     @Autowired
     private RestTemplate restTemplate;

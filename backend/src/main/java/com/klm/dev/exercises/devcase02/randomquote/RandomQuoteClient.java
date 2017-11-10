@@ -17,7 +17,7 @@ import java.util.concurrent.*;
 
 @Service
 @Configuration
-@PropertySource("classpath:RandomQuote.properties")
+@PropertySource("classpath:randomQuote.properties")
 
 public class RandomQuoteClient {
 
