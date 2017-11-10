@@ -2,26 +2,24 @@ package com.klm.dev.exercises.devcase02.randomquote;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("/quotes")
 @PropertySource("classpath:RandomQuote.properties")
 public class RandomQuoteController {
     @Autowired
     private RandomQuoteClient randomQuoteClient;
 
     @CrossOrigin
-    @GetMapping("/quote")
+    @RequestMapping(value = "1", method = RequestMethod.GET)
     public Quote getQuote() {
         return randomQuoteClient.getQuote();
     }
 
     @CrossOrigin
-    @GetMapping ("/quotes")
+    @GetMapping
     public List<Quote> getQuotes() {   return randomQuoteClient.getQuotes(); }
 
 }

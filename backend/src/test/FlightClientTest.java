@@ -33,7 +33,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@Configuration
 @TestPropertySource(locations = {"classpath:Test.properties"})
 public class FlightClientTest {
 
@@ -64,7 +63,6 @@ public class FlightClientTest {
         flight.setRoute(route);
         Flight[] flights = {flight, flight};
         when(restTemplate.getForObject(anyString(), eq(Flight[].class))).thenReturn(flights);
-
         Weather weather1 = new Weather();
         Location location1 = new Location();
         location1.setLocationCode(airportCode1);
@@ -79,7 +77,9 @@ public class FlightClientTest {
         Weather[] weatherarray= new Weather[ newweathers.size()];
         weatherarray= newweathers.toArray(weatherarray);
         when(weatherClient.getWeathers(Mockito.any(String[].class))).thenReturn(newweathers);
+
         Flight[] response = flightClient.getFlights2();
+
         verify(weatherClient).getWeathers(route);
         assertTrue(Arrays.deepEquals(flight.getWeather(), weatherarray));
     }
