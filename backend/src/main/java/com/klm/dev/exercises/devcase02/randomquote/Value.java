@@ -1,16 +1,15 @@
 package com.klm.dev.exercises.devcase02.randomquote;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 public class Value {
 
-    @Getter
-    @Setter
+
     private Long id;
-    @Getter
-    @Setter
     private String quote;
 
     public Value() {
