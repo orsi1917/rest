@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class WeatherController {
@@ -22,7 +23,7 @@ public class WeatherController {
 
     @CrossOrigin
     @GetMapping("/weathers/" )
-    public List<Weather> getWeather (List<String> cityName) {
+    public Map<String, Weather> getWeather (List<String> cityName) {
        return weatherClient.getWeathers(cityName);
 
         }

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 
 @Service
@@ -37,20 +39,22 @@ public class WeatherClient {
         weather.setLocation(location);
         return weather;
         }
-    public List<Weather> getWeathers(List<String> cityName) {
+    public Map<String, Weather> getWeathers(List<String> cityName) {
         ExecutorService executor = Executors.newFixedThreadPool(NUMBEROFTHREADS);
         List<Future<Weather>> list = new ArrayList<Future<Weather>>();
-        List<Weather> weathers = new ArrayList<Weather>();
+        Map<String, Weather> mapLocationToWeather = new LinkedHashMap<>();
         for (int i = 0; i < cityName.size(); i++) {
             Callable<Weather> worker = new WeatherCallable(restTemplate, url+cityName.get(i));
             Future<Weather> submit = executor.submit(worker);
             list.add(submit);
         }
         Weather weather = new Weather();
+        String location;
            for (Future<Weather> future : list) {
             try {
                 weather = future.get();
-                weathers.add(weather);
+                location= weather.getLocation().getLocationCode();
+                mapLocationToWeather.put(location, weather);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -58,7 +62,7 @@ public class WeatherClient {
             }
         }
 
-        return weathers;
+        return mapLocationToWeather;
 
     }
 }

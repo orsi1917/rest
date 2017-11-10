@@ -30,16 +30,12 @@ public class FlightService {
         return location;
 
     }
-    public List<Flight> addWeatherToFlight(List <Flight> flights, List <Weather> weathers) {
+    public List<Flight> addWeatherToFlight(List <Flight> flights, Map<String, Weather> weathers ) {
         for (Flight flight: flights){
             List <Weather> flightWeather = new ArrayList<>();
-            for (int i =0; i<flight.getRoute().size(); i++ ) {
-                for (Weather weather : weathers){
-                    if (weather.getLocation().getLocationCode().equals(flight.getRoute().get(i))){
-                        flightWeather.add(weather);
-                        continue;
-                    }
-                }
+            for (String location : flight.getRoute()){
+                Weather weather = weathers.get(location);
+                flightWeather.add(weather);
             }
             flight.setWeather(flightWeather);
         }

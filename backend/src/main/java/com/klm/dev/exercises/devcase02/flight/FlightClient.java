@@ -9,10 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Configuration
@@ -37,7 +34,7 @@ public class FlightClient {
     public List<Flight> getFlightsWithWeather() {
         List <Flight> flights = Arrays.asList(restTemplate.getForObject(url, Flight[].class));
         List <String>locations = flightService.getAllDestinations(flights);
-        List<Weather> weathers = weatherClient.getWeathers(locations);
+        Map<String, Weather> weathers = weatherClient.getWeathers(locations);
         flights = flightService.addWeatherToFlight(flights, weathers );
         return flights;
     }
