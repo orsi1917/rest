@@ -18,7 +18,7 @@ public class FlightClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final int NTHREDS = 20;
+    private static final int NUMBEROFTHREADS = 20;
 
     @Autowired
     private WeatherClient weatherClient;

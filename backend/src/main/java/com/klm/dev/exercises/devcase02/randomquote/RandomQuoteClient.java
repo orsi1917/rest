@@ -1,17 +1,12 @@
 package com.klm.dev.exercises.devcase02.randomquote;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.stereotype.*;
-import org.springframework.beans.factory.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -22,7 +17,7 @@ import java.util.concurrent.*;
 public class RandomQuoteClient {
 
     private RestTemplate restTemplate = new RestTemplate();
-    private static final int NTHREDS = 10;
+    private static final int NUMBEROFTHREADS = 10;
 
     @Value("${quote.url}")
     private String url;
@@ -35,7 +30,7 @@ public class RandomQuoteClient {
     }
 
     public List<Quote> getQuotes() {
-        ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
+        ExecutorService executor = Executors.newFixedThreadPool(NUMBEROFTHREADS);
         List<Future<Quote>> list = new ArrayList<Future<Quote>>();
         List<Quote> quotes = new ArrayList<Quote>();
         for (int i = 0; i < repeat; i++) {

@@ -1,6 +1,5 @@
 package com.klm.dev.exercises.devcase02.weather;
 
-import com.klm.dev.exercises.devcase02.randomquote.RandomQuoteCallable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +17,7 @@ import java.util.concurrent.*;
 public class WeatherClient {
     @Autowired
     private RestTemplate restTemplate;
-    private static final int NTHREDS = 30;
+    private static final int NUMBEROFTHREADS = 30;
 
     @Value("${url}")
     private String url;
@@ -39,7 +38,7 @@ public class WeatherClient {
         return weather;
         }
     public List<Weather> getWeathers(List<String> cityName) {
-        ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
+        ExecutorService executor = Executors.newFixedThreadPool(NUMBEROFTHREADS);
         List<Future<Weather>> list = new ArrayList<Future<Weather>>();
         List<Weather> weathers = new ArrayList<Weather>();
         for (int i = 0; i < cityName.size(); i++) {
