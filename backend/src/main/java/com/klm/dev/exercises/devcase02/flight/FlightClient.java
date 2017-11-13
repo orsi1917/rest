@@ -28,7 +28,7 @@ public class FlightClient {
 
     public List<Flight> getFlights() {
         List <Flight> flights = Arrays.asList(restTemplate.getForObject(url, Flight[].class));
-        Set<String> locations = new HashSet<>();
+       // Set<String> locations = new HashSet<>();
         return flights;
     }
     public List<Flight> getFlightsWithWeather() {

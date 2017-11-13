@@ -25,7 +25,7 @@ public class WeatherClient {
     private String url;
 
     public Weather getWeather(String cityName) {
-        Weather weather= new Weather();
+        Weather weather;
         weather= restTemplate.getForObject(url+cityName, Weather.class);
         Location location = new Location();
         location= weather.getLocation();
@@ -48,7 +48,7 @@ public class WeatherClient {
             Future<Weather> submit = executor.submit(worker);
             list.add(submit);
         }
-        Weather weather = new Weather();
+        Weather weather ;
         String location;
            for (Future<Weather> future : list) {
             try {

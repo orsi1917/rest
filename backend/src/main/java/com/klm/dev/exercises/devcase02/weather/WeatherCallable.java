@@ -14,7 +14,7 @@ public class WeatherCallable implements Callable<Weather> {
     }
     @Override
     public Weather call() throws Exception {
-        Weather weather= new Weather();
+        Weather weather;
         weather=  restTemplate.getForObject(url, Weather.class);
         Location location = new Location();
         // The JSON from the weather API does not contain a field locationCode (airport code).
