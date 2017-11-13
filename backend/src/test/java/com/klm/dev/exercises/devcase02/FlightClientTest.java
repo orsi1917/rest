@@ -2,11 +2,12 @@ package com.klm.dev.exercises.devcase02;
 
 
 import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @TestPropertySource(locations = {"classpath:Test.properties"})
 public class FlightClientTest {
 
