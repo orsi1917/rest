@@ -17,6 +17,6 @@ public class MockFlightStatusController {
 
     @GetMapping("/flightstatus")
     public String getFlightStatus() {
-        return  flightstatus;
+        return flightstatus;
     }
 }

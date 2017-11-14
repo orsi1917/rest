@@ -37,7 +37,7 @@ public class FlightService {
     }
 
 
-    public List<String> getAllDestinations(List<Flight> flights) {
+    private List<String> getAllDestinations(List<Flight> flights) {
         Set<String> locations = new HashSet<>();
         flights.forEach(flight -> {
             flight.getRoute().forEach(location -> {
@@ -49,7 +49,7 @@ public class FlightService {
 
     }
 
-    public List<Flight> addWeatherToFlight(List<Flight> flights, Map<String, Weather> weathers) {
+    private List<Flight> addWeatherToFlight(List<Flight> flights, Map<String, Weather> weathers) {
         flights.forEach(flight -> {
             List<Weather> flightWeather = new ArrayList<>();
             flight.getRoute().forEach(location -> {
