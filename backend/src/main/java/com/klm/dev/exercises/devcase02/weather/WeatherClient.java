@@ -1,9 +1,11 @@
 package com.klm.dev.exercises.devcase02.weather;
 
+import com.klm.dev.exercises.devcase02.executor.ExecutorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,51 +19,58 @@ import java.util.concurrent.*;
 @Configuration
 @PropertySource("classpath:weather.properties")
 public class WeatherClient {
+
+    @Value("${executor.CorePoolSize}")
+    private int corePoolSize;
+    @Value("${executor.MaxPoolSize}")
+    private int maxPoolSize;
+    @Value("${executor.QueueCapacity}")
+    private int queueCapacity;
+    @Value("${executor.KeepAliveSeconds}")
+    private int keepAliveSeconds;
+
     @Autowired
     private RestTemplate restTemplate;
-    private static final int NUMBEROFTHREADS = 30;
+
 
     @Value("${url}")
     private String url;
 
     public Weather getWeather(String cityName) {
         Weather weather;
-        weather= restTemplate.getForObject(url+cityName, Weather.class);
-        Location location = new Location();
-        location= weather.getLocation();
+        weather = restTemplate.getForObject(url + cityName, Weather.class);
+        weather.getLocation().setLocationCode(cityName);
+        return weather;
         // The JSON from the weather API does not contain a field locationCode (airport code).
         // The weather API is called with the code-name of the airport.
-       //  The name for the airport in the flight status API and name for the airport in
+        //  The name for the airport in the flight status API and name for the airport in
         // the weather API are different.
         // here the code adds the airport code-name to the location object in weather to keep it
         // comperable.
-        location.setLocationCode(cityName);
-        weather.setLocation(location);
-        return weather;
-        }
+    }
+
     public Map<String, Weather> getWeathers(List<String> cityName) {
-        ExecutorService executor = Executors.newFixedThreadPool(NUMBEROFTHREADS);
+        ThreadPoolTaskExecutor executor = ExecutorHandler.getConfiguredThreadPoolTaskExecutor(corePoolSize, maxPoolSize, queueCapacity, keepAliveSeconds);
         List<Future<Weather>> list = new ArrayList<Future<Weather>>();
         Map<String, Weather> mapLocationToWeather = new LinkedHashMap<>();
-        for (int i = 0; i < cityName.size(); i++) {
-            Callable<Weather> worker = new WeatherCallable(restTemplate, url+cityName.get(i));
+
+        cityName.forEach(location -> {
+            Callable<Weather> worker = new WeatherCallable(restTemplate, url + location);
             Future<Weather> submit = executor.submit(worker);
             list.add(submit);
-        }
-        Weather weather ;
-        String location;
-           for (Future<Weather> future : list) {
+        });
+        list.forEach(future -> {
             try {
-                weather = future.get();
-                location= weather.getLocation().getLocationCode();
+                Weather weather = future.get();
+                String location = weather.getLocation().getLocationCode();
                 mapLocationToWeather.put(location, weather);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-        }
 
+        });
         return mapLocationToWeather;
 
     }
