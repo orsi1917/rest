@@ -1,4 +1,4 @@
-package com.klm.dev.exercises.devcase02.randomquote;
+package com.klm.dev.exercise.devcase02.randomquote;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;

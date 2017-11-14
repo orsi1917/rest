@@ -1,4 +1,4 @@
-package com.klm.dev.exercises.devcase02;
+package com.klm.dev.exercise.devcase02;
 
 
 import org.springframework.boot.SpringApplication;

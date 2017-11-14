@@ -1,14 +1,9 @@
-package com.klm.dev.exercises.devcase02.randomquote;
+package com.klm.dev.exercise.devcase02.randomquote;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Callable;
-
+// TODO JL have a look at the callable class you can have it as anonymous class in the calling submit or even a method
 public class RandomQuoteCallable implements Callable<Quote> {
 
     private RestTemplate restTemplate;
@@ -21,7 +16,7 @@ public class RandomQuoteCallable implements Callable<Quote> {
 
     @Override
     public Quote call() throws Exception {
-       return restTemplate.getForObject(url, Quote.class);
+        return restTemplate.getForObject(url, Quote.class);
 
     }
 }

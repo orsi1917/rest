@@ -1,4 +1,4 @@
-package com.klm.dev.exercises.devcase02.flight;
+package com.klm.dev.exercise.devcase02.flight;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,12 +18,6 @@ public class FlightController {
     @CrossOrigin
     @GetMapping
     public List<Flight> getFlights() {
-        return flightService.getFlights();
-    }
-
-    @CrossOrigin
-    @GetMapping("weather")
-    public List<Flight> getFlights2() {
         return flightService.getFlightsWithWeather();
     }
 

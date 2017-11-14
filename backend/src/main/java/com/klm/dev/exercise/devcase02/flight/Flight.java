@@ -1,14 +1,12 @@
-package com.klm.dev.exercises.devcase02.flight;
+package com.klm.dev.exercise.devcase02.flight;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.klm.dev.exercises.devcase02.weather.Weather;
+import com.klm.dev.exercise.devcase02.weather.Weather;
 import lombok.*;
 
 import java.util.List;
 
 @Builder
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Flight {
     private int flightNumber;
     private String flightScheduleDate;
