@@ -1,8 +1,10 @@
 package com.klm.dev.exercise.devcase02.flight;
 
 import com.klm.dev.exercise.devcase02.weather.Weather;
-import lombok.*;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.Singular;
 import java.util.List;
 
 @Builder

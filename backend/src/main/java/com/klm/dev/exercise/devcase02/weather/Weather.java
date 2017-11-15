@@ -1,6 +1,7 @@
 package com.klm.dev.exercise.devcase02.weather;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 @Builder
 @Data

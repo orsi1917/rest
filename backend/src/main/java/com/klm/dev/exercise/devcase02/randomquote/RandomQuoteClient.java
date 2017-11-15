@@ -22,6 +22,7 @@ public class RandomQuoteClient {
     @Autowired
     private RestTemplate restTemplate;
 
+    // TODO camelCase property naming
     @Value("${executor.CorePoolSize}")
     private int corePoolSize;
     @Value("${executor.MaxPoolSize}")
@@ -43,9 +44,10 @@ public class RandomQuoteClient {
 
     public List<Quote> getQuotes() {
         ThreadPoolTaskExecutor executor = ExecutorHandler.getConfiguredThreadPoolTaskExecutor(corePoolSize, maxPoolSize, queueCapacity, keepAliveSeconds);
+        // TODO don't initialize here but retrieve with lambda
         List<Future<Quote>> list = new ArrayList<Future<Quote>>();
         List<Quote> quotes = new ArrayList<Quote>();
-        IntStream.range(0, repeat).parallel().forEach($ -> {
+        IntStream.range(0, repeat).forEach($ -> {
             Callable<Quote> worker = new RandomQuoteCallable(restTemplate, url);
             Future<Quote> submit = executor.submit(worker);
             list.add(submit);

@@ -7,7 +7,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+
 
 @Service
 @Configuration
@@ -23,5 +25,4 @@ public class FlightClient {
         List<Flight> flights = Arrays.asList(restTemplate.getForObject(url, Flight[].class));
         return flights;
     }
-
 }
