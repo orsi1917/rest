@@ -57,20 +57,22 @@ public class RandomQuoteClient {
                         })
                         .collect(Collectors.toList());
         List<Quote> quotes = list.stream()
-                .map(future -> {
-                    Quote quote = null;
-                    try {
-                        quote = future.get();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-                    return quote;
-                })
+                .map(future -> getQuote(future))
                 .filter(quote -> Objects.nonNull(quote))
                 .collect(Collectors.toList());
         return quotes;
 
+    }
+
+    private Quote getQuote(Future<Quote> future) {
+        Quote quote = null;
+        try {
+            quote = future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return quote;
     }
 }
