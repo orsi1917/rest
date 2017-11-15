@@ -9,9 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,6 +27,9 @@ import static org.assertj.core.api.Assertions.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FlightClientTest {
 
+    Flight flight;
+    Flight[] flights;
+
     @Value("${test.airportCode1}")
     private String airportCode1;
     @Value("${test.airportCode2}")
@@ -36,18 +37,23 @@ public class FlightClientTest {
 
     @Mock
     private RestTemplate restTemplate;
-   @InjectMocks
+    @InjectMocks
     private FlightClient flightClient;
 
 
     @Before
-    public void setUp() { MockitoAnnotations.initMocks(this); }
-    @Test
-    public void testgetFlights() {
-        Flight flight = Flight.builder().route("AMS").route("JFK").build();
-        Flight[] flights = {flight, flight};
+    public void setUp() {
+
+        MockitoAnnotations.initMocks(this);
+       flight = Flight.builder().route(airportCode1).route(airportCode2).build();
+       flights = new Flight[]{flight, flight};
         when(restTemplate.getForObject(anyString(), eq(Flight[].class))).thenReturn(flights);
+    }
+
+    @Test
+    public void getFlights_ok() {
         List<Flight> response = flightClient.getFlights();
+
         verify(restTemplate).getForObject(anyString(), eq(Flight[].class));
         assertThat(response)
                 .isNotEmpty()
@@ -55,4 +61,4 @@ public class FlightClientTest {
                 .doesNotContainNull()
                 .hasSize(2);
     }
- }
+}
