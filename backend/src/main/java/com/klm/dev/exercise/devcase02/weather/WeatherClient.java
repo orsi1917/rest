@@ -33,13 +33,13 @@ public class WeatherClient {
 
 
 
-    @Value("${executor.CorePoolSize}")
+    @Value("${executor.corePoolSize}")
     private int corePoolSize;
-    @Value("${executor.MaxPoolSize}")
+    @Value("${executor.maxPoolSize}")
     private int maxPoolSize;
-    @Value("${executor.QueueCapacity}")
+    @Value("${executor.queueCapacity}")
     private int queueCapacity;
-    @Value("${executor.KeepAliveSeconds}")
+    @Value("${executor.keepAliveSeconds}")
     private int keepAliveSeconds;
 
     @Autowired
