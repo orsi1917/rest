@@ -8,6 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 @Configuration
@@ -35,24 +37,23 @@ public class FlightService {
 
 
     private List<String> getAllDestinations(List<Flight> flights) {
-        Set<String> locations = new HashSet<>();
-        flights.forEach(flight -> {
-            flight.getRoute().forEach(location -> {
-                locations.add(location);
-            });
-        });
-        List<String> location = new ArrayList<String>(locations);
-        return location;
+        Set<String> locations = flights.stream()
+                .map(flight -> flight.getRoute())
+                .flatMap(location -> location.stream())
+                .collect(Collectors.toSet());
+        return new ArrayList<String>(locations);
 
     }
 
     private List<Flight> addWeatherToFlight(List<Flight> flights, Map<String, Weather> weathers) {
         flights.forEach(flight -> {
-            List<Weather> flightWeather = new ArrayList<>();
-            flight.getRoute().forEach(location -> {
-                Weather weather = weathers.get(location);
-                flightWeather.add(weather);
-            });
+            List<Weather> flightWeather =
+                    flight.getRoute().stream()
+                            .map(location -> {
+                                Weather weather = weathers.get(location);
+                                return weather;
+                            })
+                            .collect(Collectors.toList());
             flight.setWeather(flightWeather);
         });
         return flights;
