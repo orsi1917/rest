@@ -1,7 +1,7 @@
 package com.klm.dev.exercise.devcase02.weather;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * <h1> Location </h1>
