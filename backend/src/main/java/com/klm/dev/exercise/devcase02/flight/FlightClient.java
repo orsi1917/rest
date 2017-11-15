@@ -1,6 +1,5 @@
 package com.klm.dev.exercise.devcase02.flight;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +20,8 @@ public class FlightClient {
     private String url;
 
     public List<Flight> getFlights() {
-        List <Flight> flights = Arrays.asList(restTemplate.getForObject(url, Flight[].class));
+        List<Flight> flights = Arrays.asList(restTemplate.getForObject(url, Flight[].class));
         return flights;
     }
-
 
 }

@@ -21,11 +21,10 @@ public class WeatherController {
     }
 
     @CrossOrigin
-    @GetMapping("/weathers/" )
-    public Map<String, Weather> getWeather (List<String> cityName) {
-       return weatherClient.getWeathers(cityName);
-
-        }
+    @GetMapping("/weathers/")
+    public Map<String, Weather> getWeather(List<String> cityName) {
+        return weatherClient.getWeathers(cityName);
+    }
 
 }
 
