@@ -48,7 +48,6 @@ public class WeatherClient {
     @Value("${url}")
     private String url;
 
-    // TODO intorduce caching
     public Weather getWeather(String cityName) {
         Weather weather;
         weather = restTemplate.getForObject(url + cityName, Weather.class);
@@ -60,9 +59,8 @@ public class WeatherClient {
         ThreadPoolTaskExecutor executor = ExecutorHandler.getConfiguredThreadPoolTaskExecutor(corePoolSize, maxPoolSize, queueCapacity, keepAliveSeconds);
         List<Future<Weather>> listOfFutureWeathers = cityName.stream()
                 .map(location -> {
-                    Callable<Weather> worker = new WeatherCallable(restTemplate, url + location);
-                    Future<Weather> submit = executor.submit(worker);
-                    return submit;
+                  Future<Weather> submit2 = executor.submit(() -> getWeather(location));
+                    return submit2;
                 })
                 .collect(Collectors.toList());
 
@@ -78,8 +76,7 @@ public class WeatherClient {
         Weather weather = null;
         try {
             weather = future.get();
-            // TODO ik moet dit even uitzoeken waarom ik dit toegevoegd heb
-            String location = weather.getLocation().getLocationCode();
+            log.info("got it from API");
         } catch (InterruptedException e) {
             log.error("Logged error message", e);
         } catch (ExecutionException e) {
