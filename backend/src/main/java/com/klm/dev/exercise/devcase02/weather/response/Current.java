@@ -1,10 +1,10 @@
-package com.klm.dev.exercise.devcase02.weather;
+package com.klm.dev.exercise.devcase02.weather.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
+
 @Data
 public class Current {
     @JsonProperty("last_updated")
@@ -16,12 +16,5 @@ public class Current {
     @JsonProperty("is_day")
     private Boolean isDay;
     private Condition condition;
-    @JsonProperty("wind_mph")
-    private Double windMph;
-    @JsonProperty("wind_kph")
-    private Double windKmph;
-    @JsonProperty("feelslike_c")
-    private Double feelsLikeInCelsius;
-    @JsonProperty("feelslike_f")
-    private Double feelsLikeInFahrenheid;
+
 }

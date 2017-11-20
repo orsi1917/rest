@@ -1,6 +1,6 @@
 package com.klm.dev.exercise.devcase02.flight;
 
-import com.klm.dev.exercise.devcase02.weather.Weather;
+import com.klm.dev.exercise.devcase02.weather.backend.Weather;
 
 import lombok.Builder;
 import lombok.Data;

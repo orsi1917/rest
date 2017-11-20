@@ -1,7 +1,7 @@
 package com.klm.dev.exercise.devcase02.flight;
 
-import com.klm.dev.exercise.devcase02.weather.Weather;
-import com.klm.dev.exercise.devcase02.weather.WeatherClient;
+import com.klm.dev.exercise.devcase02.weather.backend.Weather;
+import com.klm.dev.exercise.devcase02.weather.backend.WeatherClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

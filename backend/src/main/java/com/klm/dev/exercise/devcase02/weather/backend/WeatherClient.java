@@ -1,4 +1,4 @@
-package com.klm.dev.exercise.devcase02.weather;
+package com.klm.dev.exercise.devcase02.weather.backend;
 
 import com.klm.dev.exercise.devcase02.executor.ExecutorHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpEntity;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 

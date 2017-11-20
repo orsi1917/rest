@@ -1,5 +1,6 @@
-package com.klm.dev.exercise.devcase02.weather;
+package com.klm.dev.exercise.devcase02.weather.backend;
 
+import com.klm.dev.exercise.devcase02.weather.backend.Weather;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

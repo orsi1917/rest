@@ -1,8 +1,8 @@
-package com.klm.dev.exercise.devcase02.weather;
+package com.klm.dev.exercise.devcase02.weather.response;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
+
 @Data
 public class Condition {
     private String text;

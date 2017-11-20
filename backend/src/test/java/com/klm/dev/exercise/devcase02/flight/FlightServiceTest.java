@@ -1,30 +1,20 @@
 package com.klm.dev.exercise.devcase02.flight;
-import com.klm.dev.exercise.devcase02.weather.Location;
-import com.klm.dev.exercise.devcase02.weather.Weather;
-import com.klm.dev.exercise.devcase02.weather.WeatherClient;
-import org.assertj.core.util.Lists;
-import org.junit.Before;
-import org.junit.Test;
+import com.klm.dev.exercise.devcase02.weather.backend.Weather;
+import com.klm.dev.exercise.devcase02.weather.backend.WeatherClient;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.*;
 
 @TestPropertySource(locations = {"classpath:Test.properties"})
 @RunWith(SpringJUnit4ClassRunner.class)

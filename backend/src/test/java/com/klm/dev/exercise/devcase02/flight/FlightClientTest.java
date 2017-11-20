@@ -1,9 +1,6 @@
 package com.klm.dev.exercise.devcase02.flight;
 
 
-import com.klm.dev.exercise.devcase02.weather.Location;
-import com.klm.dev.exercise.devcase02.weather.Weather;
-import com.klm.dev.exercise.devcase02.weather.WeatherClient;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

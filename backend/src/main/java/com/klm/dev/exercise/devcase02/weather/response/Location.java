@@ -1,4 +1,4 @@
-package com.klm.dev.exercise.devcase02.weather;
+package com.klm.dev.exercise.devcase02.weather.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.Data;
  * @version 1.0
  */
 
-@Builder
+
 @Data
 public class Location {
     private String name;
