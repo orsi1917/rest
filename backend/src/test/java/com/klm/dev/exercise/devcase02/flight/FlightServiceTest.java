@@ -51,48 +51,48 @@ public class FlightServiceTest {
     @InjectMocks
     private FlightService flightService;
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        flight = Flight.builder().route(airportCode1).route(airportCode2).build();
-        flights = new ArrayList<>();
-        flights.add(flight);
-        flights.add(flight);
-        when(flightClient.getFlights()).thenReturn(flights);
-
-        weathers = new HashMap<>();
-        weather1 = Weather.builder().location(Location.builder().locationCode(airportCode1).build()).build();
-        weather2 = Weather.builder().location(Location.builder().locationCode(airportCode2).build()).build();
-        weathers.put(airportCode1, weather1);
-        weathers.put(airportCode2, weather2);
-        when(weatherClient.getWeathers(Matchers.anyList())).thenReturn(weathers);
-    }
-
-    @Test
-    public void testgetFlights() {
-        List<Flight> response = flightService.getFlights();
-        assertThat(response)
-                .isNotEmpty()
-                .contains(flight)
-                .doesNotContainNull()
-                .hasSize(2);
-
-    }
-    @Test
-    public void getAllDestinations() {
-
-        List <Flight> response = flightService.getFlightsWithWeather();
-        assertThat(response)
-                .isNotEmpty()
-                .contains(flight)
-                .doesNotContainNull()
-                .hasSize(2);
-        assertThat(response.get(0).getWeather())
-                .isNotEmpty()
-                .contains(weather1)
-                .hasSize(2);
-        verify(flightClient).getFlights() ;
-        verify(weatherClient).getWeathers(Lists.newArrayList(airportCode1, airportCode2));
-
-    }
+//    @Before
+//    public void setUp() {
+//        MockitoAnnotations.initMocks(this);
+//        flight = Flight.builder().route(airportCode1).route(airportCode2).build();
+//        flights = new ArrayList<>();
+//        flights.add(flight);
+//        flights.add(flight);
+//        when(flightClient.getFlights()).thenReturn(flights);
+//
+//        weathers = new HashMap<>();
+//        weather1 = Weather.builder().location(Location.builder().locationCode(airportCode1).build()).build();
+//        weather2 = Weather.builder().location(Location.builder().locationCode(airportCode2).build()).build();
+//        weathers.put(airportCode1, weather1);
+//        weathers.put(airportCode2, weather2);
+//        when(weatherClient.getWeathers(Matchers.anyList())).thenReturn(weathers);
+//    }
+//
+//    @Test
+//    public void testgetFlights() {
+//        List<Flight> response = flightService.getFlights();
+//        assertThat(response)
+//                .isNotEmpty()
+//                .contains(flight)
+//                .doesNotContainNull()
+//                .hasSize(2);
+//
+//    }
+//    @Test
+//    public void getAllDestinations() {
+//
+//        List <Flight> response = flightService.getFlightsWithWeather();
+//        assertThat(response)
+//                .isNotEmpty()
+//                .contains(flight)
+//                .doesNotContainNull()
+//                .hasSize(2);
+//        assertThat(response.get(0).getWeather())
+//                .isNotEmpty()
+//                .contains(weather1)
+//                .hasSize(2);
+//        verify(flightClient).getFlights() ;
+//        verify(weatherClient).getWeathers(Lists.newArrayList(airportCode1, airportCode2));
+//
+//    }
 }
