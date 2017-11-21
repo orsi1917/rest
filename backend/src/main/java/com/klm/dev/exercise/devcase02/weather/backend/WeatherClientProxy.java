@@ -40,7 +40,7 @@ public class WeatherClientProxy {
     @Cacheable(value = "cityName")
     public Weather getWeather(String cityName) {
                HttpHeaders headers = new HttpHeaders();
-        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+        headers.set("Accept", "application/json;version=com.klm.dev.exercise.devcase02.v2");
         HttpEntity<Weather> request = new HttpEntity<>(headers);
         ResponseEntity<Weather> response = restTemplate.exchange(url+ cityName, HttpMethod.GET, request , Weather.class);
         Weather weather;

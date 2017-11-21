@@ -1,14 +1,16 @@
 package com.klm.dev.exercise.devcase02.weather.backend;
+
+import com.klm.dev.exercise.devcase02.versioncontrol.Versions;
 import org.modelmapper.ModelMapper;
 
 import com.klm.dev.exercise.devcase02.weather.response.Weather;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -24,23 +26,24 @@ public class WeatherController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Produces(MediaType.APPLICATION_JSON)
-    @CrossOrigin
-    @RequestMapping( value ="/weather/{cityName}",  headers = "Accept=application/json", produces = "application/json; charset=UTF-8" , method = RequestMethod.GET )
-     public ResponseEntity<Weather> getWeather_v1(@PathVariable String cityName, @RequestHeader(value="version", defaultValue="1.0") double version) {
-       log.info("version= " + version);
-        if (cityName.length()!=3){
-            return new ResponseEntity("Invalid airport code. Please use a three-letter airport code, such as: AMS (Amsterdam).", HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (version == 1.0) {
-            com.klm.dev.exercise.devcase02.weather.backend.Weather weather = weatherClient.getWeather(cityName);
-            return new ResponseEntity(weather,HttpStatus.OK );
-        } else if (version == 2.0) {
-            com.klm.dev.exercise.devcase02.weather.backend.Weather weather = weatherClient.getWeather(cityName);
+    @Autowired
+    private HttpServletRequest request;
 
-            return new ResponseEntity(changeModel (weather), HttpStatus.OK );
+    @CrossOrigin
+    @RequestMapping(value = "/weather/{cityName}", produces = "application/json", method = RequestMethod.GET)
+    public ResponseEntity<Weather> getWeather_v1(@PathVariable String cityName, @RequestHeader(value = "Accept", defaultValue = "2.0") Versions version) {
+
+        if (cityName.length() != 3) {
+
+            return new ResponseEntity("\"Invalid airport code. Please use a three-letter airport code, such as: AMS (Amsterdam).\"", HttpStatus.NOT_ACCEPTABLE);
+        }
+        if (version.equals(Versions.V1)) {
+
+            com.klm.dev.exercise.devcase02.weather.backend.Weather weather = weatherClient.getWeather(cityName);
+            return new ResponseEntity(weather, HttpStatus.OK);
         } else {
-            return new ResponseEntity("Invalid airport code. Please use a three-letter airport code, such as: AMS (Amsterdam).", HttpStatus.NOT_ACCEPTABLE);
+            com.klm.dev.exercise.devcase02.weather.backend.Weather weather = weatherClient.getWeather(cityName);
+            return new ResponseEntity(changeModel(weather), HttpStatus.OK);
         }
     }
 
@@ -51,7 +54,7 @@ public class WeatherController {
         return weatherClient.getWeathers(cityName);
     }
 
-    private com.klm.dev.exercise.devcase02.weather.response.Weather changeModel (com.klm.dev.exercise.devcase02.weather.backend.Weather weather) {
+    private com.klm.dev.exercise.devcase02.weather.response.Weather changeModel(com.klm.dev.exercise.devcase02.weather.backend.Weather weather) {
         return modelMapper.map(weather, com.klm.dev.exercise.devcase02.weather.response.Weather.class);
 
     }
