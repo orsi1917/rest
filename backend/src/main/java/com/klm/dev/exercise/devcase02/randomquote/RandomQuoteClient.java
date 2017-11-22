@@ -1,6 +1,6 @@
 package com.klm.dev.exercise.devcase02.randomquote;
 
-import com.klm.dev.exercise.devcase02.executor.ExecutorHandler;
+import com.klm.dev.exercise.devcase02.spring.executor.ExecutorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Objects;

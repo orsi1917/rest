@@ -1,4 +1,4 @@
-package com.klm.dev.exercise.devcase02.weather.response;
+package com.klm.dev.exercise.devcase02.weather.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

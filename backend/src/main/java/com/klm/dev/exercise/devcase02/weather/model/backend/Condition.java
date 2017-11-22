@@ -1,4 +1,4 @@
-package com.klm.dev.exercise.devcase02.weather.backend;
+package com.klm.dev.exercise.devcase02.weather.model.backend;
 import lombok.Builder;
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.klm.dev.exercise.devcase02.weather.backend;
+package com.klm.dev.exercise.devcase02.weather;
 
-import com.klm.dev.exercise.devcase02.weather.backend.Weather;
+import com.klm.dev.exercise.devcase02.weather.model.backend.Weather;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,12 +39,11 @@ public class WeatherClientProxy {
      */
     @Cacheable(value = "cityName")
     public Weather getWeather(String cityName) {
-               HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "application/json;version=com.klm.dev.exercise.devcase02.v2");
         HttpEntity<Weather> request = new HttpEntity<>(headers);
         ResponseEntity<Weather> response = restTemplate.exchange(url+ cityName, HttpMethod.GET, request , Weather.class);
-        Weather weather;
-        weather = restTemplate.getForObject(url + cityName, Weather.class);
+        Weather weather = response.getBody();
         weather.getLocation().setLocationCode(cityName);
         log.info(" got it from API: " + weather.getLocation().getLocationCode());
         return weather;

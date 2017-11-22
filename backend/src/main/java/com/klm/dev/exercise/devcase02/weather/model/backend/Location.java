@@ -1,9 +1,7 @@
-package com.klm.dev.exercise.devcase02.weather.response;
+package com.klm.dev.exercise.devcase02.weather.model.backend;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * <h1> Location </h1>
@@ -19,11 +17,8 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 
-
 @Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Location {
     private String name;
     private String locationCode;

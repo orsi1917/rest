@@ -1,6 +1,7 @@
 package com.klm.dev.exercise.devcase02.flight;
 
 
+import com.klm.dev.exercise.devcase02.flight.model.backend.Flight;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,7 @@
-package com.klm.dev.exercise.devcase02.weather.backend;
+package com.klm.dev.exercise.devcase02.weather;
 
-import com.klm.dev.exercise.devcase02.executor.ExecutorHandler;
+import com.klm.dev.exercise.devcase02.spring.executor.ExecutorHandler;
+import com.klm.dev.exercise.devcase02.weather.model.backend.Weather;
 import lombok.extern.slf4j.Slf4j;
 
 
