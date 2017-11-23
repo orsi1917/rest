@@ -29,5 +29,4 @@ public class Location {
     private String region;
     private String country;
     private String localtime;
-
 }
