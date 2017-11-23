@@ -25,11 +25,6 @@ public class FlightService {
     @Autowired
     WeatherClient weatherClient;
 
-    public List<Flight> getFlights() {
-        List<Flight> flights = flightClient.getFlights();
-        return flights;
-    }
-
     public List<Flight> getFlightsWithWeather() {
         List<Flight> flights = flightClient.getFlights();
         List<String> locations = getAllDestinations(flights);
@@ -38,32 +33,22 @@ public class FlightService {
         return flights;
     }
 
-
     private List<String> getAllDestinations(List<Flight> flights) {
-        Set<String> locations = flights.stream()
-                .map(flight -> flight.getRoute())
-                .flatMap(location -> location.stream())
-                .collect(Collectors.toSet());
-        return new ArrayList<String>(locations);
-
+        return new ArrayList<String>(
+                flights.stream()
+                        .map(flight -> flight.getRoute())
+                        .flatMap(location -> location.stream())
+                        .collect(Collectors.toSet())
+        );
     }
 
     private List<Flight> addWeatherToFlight(List<Flight> flights, Map<String, Weather> weathers) {
-        flights.forEach(flight -> {
-            List<Weather> flightWeather =
-                    flight.getRoute().stream()
-                            .map(location -> {
-                                Weather weather = weathers.get(location);
-                                return weather;
-                            })
-                            .collect(Collectors.toList());
-            flight.setWeather(flightWeather);
-        });
+        flights.forEach(flight -> flight.setWeather(
+                flight.getRoute().stream()
+                        .map(location -> weathers.get(location))
+                        .collect(Collectors.toList())
+                )
+        );
         return flights;
-
     }
 }
-
-
-
-

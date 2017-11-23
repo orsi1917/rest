@@ -1,6 +1,6 @@
 package com.klm.dev.exercise.devcase02.randomquote;
 
-import com.klm.dev.exercise.devcase02.spring.executor.ExecutorHandler;
+import com.klm.dev.exercise.devcase02.springtools.executor.ExecutorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

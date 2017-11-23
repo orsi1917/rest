@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 
-
 @Builder
 @Data
 @AllArgsConstructor
@@ -30,5 +29,4 @@ public class Location {
     private String region;
     private String country;
     private String localtime;
-
 }

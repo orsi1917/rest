@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class Weather {
     private Location location;
     private Current current;
-
 }

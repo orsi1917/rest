@@ -2,13 +2,14 @@ package com.klm.dev.exercise.devcase02.flight.model.backend;
 
 import com.klm.dev.exercise.devcase02.weather.model.backend.Weather;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Singular;
+import lombok.*;
+
 import java.util.List;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Flight {
     private int flightNumber;
     private String flightScheduleDate;

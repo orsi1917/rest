@@ -1,4 +1,4 @@
-package com.klm.dev.exercise.devcase02.weather.model.backend;
+package com.klm.dev.exercise.devcase02.Error;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Weather {
-    private Location location;
-    private Current current;
+public class ErrorObject {
+    private int statusCode;
+    private String errorMessage;
 }

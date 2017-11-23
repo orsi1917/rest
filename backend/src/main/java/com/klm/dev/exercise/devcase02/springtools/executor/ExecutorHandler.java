@@ -1,4 +1,4 @@
-package com.klm.dev.exercise.devcase02.spring.executor;
+package com.klm.dev.exercise.devcase02.springtools.executor;
 
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
